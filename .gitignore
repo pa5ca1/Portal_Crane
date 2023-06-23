@@ -37,4 +37,4 @@ octave-workspace
 # exclude everything
 fig/*
 # exception to the rule
-!fig/.gitkeep 
+!fig/.keep 
