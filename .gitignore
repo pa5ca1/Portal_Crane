@@ -30,9 +30,11 @@ codegen/
 # Octave session info
 octave-workspace
 
+# Exclude .DS_Stores
+*.DS_Store
+
 
 # exclude everything
 fig/*
-
 # exception to the rule
 !fig/.gitkeep 
