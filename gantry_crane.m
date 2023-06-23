@@ -22,6 +22,7 @@ p.epsilon = 0.1;
 p.k = 1;
 p.k_p = 1;
 p.d = 1;
+p.z_soll = 1;
 
 
 %% ODE solver
@@ -61,14 +62,14 @@ function dXdt = crane_system(~,X,p)
     z_t = X(2*p.N+4);
 
     %% Controler ???
-    %F_t = 1/(p.k*(p.k - p.mu)) * (-p.d*z_t + p.k_p * p.epsilon);
-    F_t = 0.01;
-    F_fr = 0;
-
-    % Plug in in eq. for F_t = f(F_fr)
-    % F_Fr - F_t = F_t * (mu-1)
+    % Calculation epsilon
+    epsilon = z-p.z_soll;
+    F_t = (-p.d*z_t + p.k_p * epsilon);
+    %F_t = 0.01;
+    
     % Ansatz 1: F_fr = 0
-    % Ansatz 2: F_fr = mu * v_{cat}
+    % Ansatz 2: F_fr = p.mu * z_t
+    F_fr = 0;
 
     %% ODE for phi
     %phi_tt = -1/(p.l * p.m_k) * (p.g*p.m_1*phi + F_t * (p.mu-1));
