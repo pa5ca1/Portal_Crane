@@ -16,11 +16,9 @@ function dXdt = crane_system(t,X,p)
         F_t = controller_output(z_t,F_fr,epsilon,p);
     else
         % No controller
-        F_fr = 0;
-        F_t = 0;
+        F_fr = calculate_friction_force(z_t,p);
+        F_t = 0.01;
     end
-
-    
 
     %% ODE for phi
     phi_tt = -1/(p.l * p.m_k) * (p.g*p.m_1*phi + F_t - F_fr);
@@ -54,5 +52,7 @@ function dXdt = crane_system(t,X,p)
     %% Return
     dXdt = [w_t',w_tt,phi_t,phi_tt,z_t,z_tt]';
 
-    [t F_t epsilon w_tt(p.N) w(end) p.z_soll]
+    %[t F_t epsilon w_tt(p.N) w(end) p.z_soll]
 end
+
+
